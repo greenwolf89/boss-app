@@ -1,4 +1,4 @@
-# API Endpoints
+### API Endpoints
 
 ### Log in
 
@@ -11,7 +11,7 @@
 
 * Response: Account information and a token
 * Response shape (JSON):
-    `{
+    '{
       "user": {
         «key»: type»,
       },
@@ -28,9 +28,7 @@
 
 * Response: Always true
 * Response shape (JSON):
-    `
-    true
-    `
+    'true'
 
 ### Sign up
 
@@ -47,8 +45,7 @@
 
 * Response: Always true
 * Response shape (JSON):
-    `
-    {
+    '{
       "accountId": smallint,
       "firstName": varchar,
       "lastName": varchar,
@@ -57,8 +54,7 @@
       "email": varchar,
       "phone": varchar,
       "accessToken": varchar
-    }
-    `
+    }'
 
 ### User Link Single Institution to Plaid
 
@@ -93,7 +89,7 @@
   "request_id": "Aim3b"
 }'
 
-### Update User Institutions Property With Plaid API Access Token
+### Update User Access Token Property With Plaid API Access Token
 
 * Endpoint path: /api/account/{account_id}
 * Endpoint method: PUT
@@ -102,7 +98,7 @@
   * "accessToken": "access-sandbox-de3ce8ef-33f8-452c-a685-8671031fc0f6"
 
 * Response shape(JSON)
-  {
+  '{
       "accountId": 5165,
       "firstName": Waylen,
       "lastName": Roche,
@@ -111,7 +107,7 @@
       "email": waylenroche@gmail.com,
       "phone": 8505093794,
       "accessToken": "access-sandbox-de3ce8ef-33f8-452c-a685-8671031fc0f6",
-    }
+    }'
 
 ### User Get Accounts Info From Plaid
 
