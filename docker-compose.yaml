@@ -3,36 +3,34 @@ volumes:
     external: true
 
 services:
-
   backend:
     depends_on:
       - postgres
     build:
       context: ./backend
-      dockerfile: ./Dockerfile.dev
+      dockerfile: Dockerfile
     restart: on-failure
     # env_file: ./. env
     ports:
       - 8080:8000
     environment:
-      SPRING_APPLICATION_JSON:
-        '{
-            "spring.datasource.url":"jdbc:postgresql://localhost:5432/boss-app",
-            "spring.datasource.username":"boss-user",
-            "spring.datasource.password":"boss-pw",
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url":"jdbc:postgresql://localhost:5432/boss-app",
+        "spring.datasource.username":"boss-user",
+        "spring.datasource.password":"boss-pw",
 
-            "spring.jpa.show-sql":"true",
-            "spring.jpa.hibernate.ddl-auto":"update",
-            "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQLDialect",
-            "spring.jpa.properties.hibernate.format_sql":"true"
-          }'
+        "spring.jpa.show-sql":"true",
+        "spring.jpa.hibernate.ddl-auto":"update",
+        "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQLDialect",
+        "spring.jpa.properties.hibernate.format_sql":"true"
+        }'
     volumes:
-      -  ./backend:/app
+      - ./backend:/app
 
   postgres:
     build:
       context: ./relational-data
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     volumes:
       - boss-app-data:/var/lib/postgresql/data
     environment:
