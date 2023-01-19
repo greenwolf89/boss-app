@@ -6,26 +6,28 @@ services:
   backend:
     depends_on:
       - postgres
+    image: backend
+    container_name: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
-    restart: on-failure
-    # env_file: ./. env
+    # restart: on-failure
+    env_file: .env
     ports:
-      - 8080:8080
+      - "8080:8000"
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url":"jdbc:postgresql://localhost:5432/boss_app",
-        "spring.datasource.username":"boss_user",
-        "spring.datasource.password":"boss-pw",
+        "spring.datasource.url":"jdbc:postgresql://localhost:5432/${POSTGRES_DB}",
+        "spring.datasource.username":"${POSTGRES_USER}",
+        "spring.datasource.password":"${POSTGRES_PASSWORD}",
 
         "spring.jpa.show-sql":"true",
         "spring.jpa.hibernate.ddl-auto":"update",
         "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQLDialect",
         "spring.jpa.properties.hibernate.format_sql":"true"
         }'
-    volumes:
-      - ./backend:/app
+    # volumes:
+    #   - ./backend:/app
 
   postgres:
     build:

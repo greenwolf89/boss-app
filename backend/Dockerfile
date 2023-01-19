@@ -4,7 +4,7 @@ FROM maven:3.8.7-openjdk-18
 WORKDIR /app
 
 # Copy the jar file into our app
-COPY ./target/backend-0.0.1-SNAPSHOT.jar /app
+COPY ./target/backend-0.0.1-SNAPSHOT.jar backend-0.0.1-SNAPSHOT.jar
 
 # Exposing port 8080
 EXPOSE 8080
