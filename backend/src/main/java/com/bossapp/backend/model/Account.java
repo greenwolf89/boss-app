@@ -1,18 +1,26 @@
-package com.bossapp.backend.accounts;
+package com.bossapp.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "accounts")
 public class Account {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_sequence")
     private long id;
 
+    @Column(nullable = false, length=255)
     private String username;
 
+    @Column(nullable = false, length=255)
     private String email;
 
+    @Column(nullable = false, length=65)
     private String password;
 
     public Account() {
