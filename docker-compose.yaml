@@ -15,8 +15,8 @@ services:
       - 8080:8000
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url":"jdbc:postgresql://localhost:5432/boss-app",
-        "spring.datasource.username":"boss-user",
+        "spring.datasource.url":"jdbc:postgresql://localhost:5432/boss_app",
+        "spring.datasource.username":"boss_user",
         "spring.datasource.password":"boss-pw",
 
         "spring.jpa.show-sql":"true",
