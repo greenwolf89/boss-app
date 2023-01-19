@@ -12,3 +12,10 @@ EXPOSE 8080
 
 # Starting the application
 CMD ["java", "-jar", "maven-wrapper.jar"]
+
+# FROM openjdk:19-alpine
+# RUN mkdir /app
+# COPY pom.xml /app/
+# COPY src /app/src
+# RUN cd /app && mvn clean install
+# CMD ["java", "-jar", "/app/target/backend.jar"]

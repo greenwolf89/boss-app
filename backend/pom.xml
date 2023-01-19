@@ -15,7 +15,8 @@
 	<name>backend</name>
 	<description>Budget Often Save Smarter</description>
 	<properties>
-		<java.version>19</java.version>
+		<maven.compiler.source>19</maven.compiler.source>
+    	<maven.compiler.target>19</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
