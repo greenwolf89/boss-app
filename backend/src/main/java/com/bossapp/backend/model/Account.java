@@ -11,16 +11,16 @@ import jakarta.persistence.Table;
 @Table(name = "accounts")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accounts_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false, length=255)
+    @Column(name = "username", nullable = false, length=255)
     private String username;
 
-    @Column(nullable = false, length=255)
+    @Column(name = "email", nullable = false, length=255)
     private String email;
 
-    @Column(nullable = false, length=65)
+    @Column(name = "password", nullable = false, length=65)
     private String password;
 
     public Account() {
