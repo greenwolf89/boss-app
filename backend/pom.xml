@@ -55,7 +55,7 @@
                         <image>
                             <name>springframeworkguru/masteringthymeleaf</name>
                             <build>
-                                <!-- <dockerFile>Dockerfile</dockerFile> -->
+                                <dockerFile>Dockerfile</dockerFile>
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
                                 </assembly>
