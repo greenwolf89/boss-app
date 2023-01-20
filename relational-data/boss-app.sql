@@ -10,7 +10,10 @@ CREATE table accounts
 CREATE table transactions
 (
 	id BIGINT NOT NULL UNIQUE,
-	items VARCHAR(255) [],
-	account_id BIGINT NOT NULL UNIQUE REFERENCES accounts("id"),
+	accountId BIGINT NOT NULL UNIQUE REFERENCES accounts("id"),
+	amount BIGINT NOT NULL,
+	category VARCHAR(255),
+	merchant VARCHAR(255),
+	date DATE NOT NULL,
 	PRIMARY KEY(id)
 );
