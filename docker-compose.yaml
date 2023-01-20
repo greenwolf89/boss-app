@@ -3,6 +3,20 @@ volumes:
     external: true
 
 services:
+  postgres:
+    image: 'postgres:14.2-bullseye'
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    build:
+      context: ./relational-data
+      dockerfile: ./Dockerfile
+    volumes:
+      - boss-app-data:/var/lib/postgresql/data
+    ports:
+      - 15432:5432
+
   backend:
     depends_on:
       - postgres
@@ -10,39 +24,31 @@ services:
     container_name: backend
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     # restart: on-failure
-    env_file: .env
     ports:
-      - "8080:8000"
+      - "8000:8080"
     environment:
-      SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url":"jdbc:postgresql://localhost:5432/${POSTGRES_DB}",
-        "spring.datasource.username":"${POSTGRES_USER}",
-        "spring.datasource.password":"${POSTGRES_PASSWORD}",
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/boss_app
+      - SPRING_DATASOURCE_USERNAME=boss_user
+      - SPRING_DATASOURCE_PASSWORD=boss-pw
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      # SPRING_APPLICATION_JSON: '{
+      #   "spring.datasource.url":"jdbc:postgresql://localhost:5432/${POSTGRES_DB}",
+      #   "spring.datasource.username":"${POSTGRES_USER}",
+      #   "spring.datasource.password":"${POSTGRES_PASSWORD}",
 
-        "spring.jpa.show-sql":"true",
-        "spring.jpa.hibernate.ddl-auto":"update",
-        "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQLDialect",
-        "spring.jpa.properties.hibernate.format_sql":"true"
-        }'
+      #   "spring.jpa.show-sql":"true",
+      #   "spring.jpa.hibernate.ddl-auto":"update",
+      #   "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQLDialect",
+      #   "spring.jpa.properties.hibernate.format_sql":"true"
+      #   }'
     # volumes:
     #   - ./backend:/app
 
-  postgres:
-    build:
-      context: ./relational-data
-      dockerfile: ./Dockerfile
-    volumes:
-      - boss-app-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_DB: $POSTGRES_DB
-    ports:
-      - 15432:5432
-
   frontend:
+    depends_on:
+      - backend
     image: node:lts-bullseye
     command: bash -c "npm install && npm start"
     working_dir: /app
