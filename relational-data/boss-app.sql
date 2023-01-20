@@ -7,3 +7,10 @@ CREATE table accounts
 	PRIMARY KEY(id)
 );
 
+CREATE table transactions
+(
+	id BIGINT NOT NULL UNIQUE,
+	items VARCHAR(255) [],
+	account_id BIGINT NOT NULL UNIQUE REFERENCES accounts("id"),
+	PRIMARY KEY(id)
+);

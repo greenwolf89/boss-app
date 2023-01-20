@@ -4,7 +4,7 @@ volumes:
 
 services:
   postgres:
-    image: 'postgres:14.2-bullseye'
+    image: "postgres:14.2-bullseye"
     container_name: postgres
     environment:
       - POSTGRES_USER=$POSTGRES_USER
@@ -25,27 +25,13 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-    # restart: on-failure
     ports:
       - "8000:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/boss_app
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
       - SPRING_DATASOURCE_USERNAME=boss_user
       - SPRING_DATASOURCE_PASSWORD=boss-pw
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      # SPRING_APPLICATION_JSON: '{
-      #   "spring.datasource.url":"jdbc:postgresql://localhost:5432/${POSTGRES_DB}",
-      #   "spring.datasource.username":"${POSTGRES_USER}",
-      #   "spring.datasource.password":"${POSTGRES_PASSWORD}",
-
-      #   "spring.jpa.show-sql":"true",
-      #   "spring.jpa.hibernate.ddl-auto":"update",
-      #   "spring.jpa.properties.hibernate.dialect":"org.hibernate.dialect.PostgreSQLDialect",
-      #   "spring.jpa.properties.hibernate.format_sql":"true"
-      #   }'
-    # volumes:
-    #   - ./backend:/app
-
   frontend:
     depends_on:
       - backend
