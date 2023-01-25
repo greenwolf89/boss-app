@@ -4,7 +4,7 @@ volumes:
 
 services:
   postgres:
-    image: 'postgres:14.2-bullseye'
+    image: "postgres:14.2-bullseye"
     container_name: postgres
     environment:
       - POSTGRES_USER=$POSTGRES_USER
@@ -32,7 +32,6 @@ services:
       - SPRING_DATASOURCE_USERNAME=boss_user
       - SPRING_DATASOURCE_PASSWORD=boss-pw
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
   frontend:
     depends_on:
       - backend
