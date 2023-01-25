@@ -1,7 +1,14 @@
 volumes:
   boss-app-data:
     external: true
-
+x-environment:
+  &PLAID_ENVIRONMENT # These are read from .env file. The values in the .env file maybe overriden by shell envvars
+  PLAID_CLIENT_ID: ${PLAID_CLIENT_ID}
+  PLAID_SECRET: ${PLAID_SECRET}
+  PLAID_PRODUCTS: ${PLAID_PRODUCTS}
+  PLAID_COUNTRY_CODES: ${PLAID_COUNTRY_CODES}
+  PLAID_REDIRECT_URI: ${PLAID_REDIRECT_URI}
+  PLAID_ENV: ${PLAID_ENV}
 services:
   postgres:
     image: "postgres:14.2-bullseye"
@@ -26,20 +33,34 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
     ports:
-      - "8000:8080"
+      - "8081:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
       - SPRING_DATASOURCE_USERNAME=boss_user
       - SPRING_DATASOURCE_PASSWORD=boss-pw
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    # networks:
+    #   - "plaid"
+  java:
+    networks:
+      - "plaid"
+    depends_on:
+      - "frontend"
+    build:
+      context: .
+      dockerfile: ./java/Dockerfile
+    ports: ["8000:8000"]
+    environment:
+      <<: *PLAID_ENVIRONMENT
+
   frontend:
     depends_on:
       - backend
-    image: node:lts-bullseye
-    command: bash -c "npm install && npm start"
-    working_dir: /app
-    volumes:
-      - ./frontend:/app
+    # volumes:
+    #   - ./frontend:/app
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -48,3 +69,9 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_BOSS_API_HOST: http://localhost:8000
+    networks:
+      - "plaid"
+
+networks:
+  plaid:
+    name: plaid
