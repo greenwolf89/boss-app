@@ -2,13 +2,17 @@ volumes:
   boss-app-data:
     external: true
 x-environment:
-  &PLAID_ENVIRONMENT # These are read from .env file. The values in the .env file maybe overriden by shell envvars
+  &QUICKSTART_ENVIRONMENT # These are read from .env file. The values in the .env file maybe overriden by shell envvars
   PLAID_CLIENT_ID: ${PLAID_CLIENT_ID}
   PLAID_SECRET: ${PLAID_SECRET}
   PLAID_PRODUCTS: ${PLAID_PRODUCTS}
   PLAID_COUNTRY_CODES: ${PLAID_COUNTRY_CODES}
   PLAID_REDIRECT_URI: ${PLAID_REDIRECT_URI}
   PLAID_ENV: ${PLAID_ENV}
+
+networks:
+  quickstart:
+    name: quickstart
 services:
   postgres:
     image: "postgres:14.2-bullseye"
@@ -39,11 +43,9 @@ services:
       - SPRING_DATASOURCE_USERNAME=boss_user
       - SPRING_DATASOURCE_PASSWORD=boss-pw
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    # networks:
-    #   - "plaid"
   java:
     networks:
-      - "plaid"
+      - "quickstart"
     depends_on:
       - "frontend"
     build:
@@ -51,11 +53,9 @@ services:
       dockerfile: ./java/Dockerfile
     ports: ["8000:8000"]
     environment:
-      <<: *PLAID_ENVIRONMENT
+      <<: *QUICKSTART_ENVIRONMENT
 
   frontend:
-    depends_on:
-      - backend
     # volumes:
     #   - ./frontend:/app
     build:
@@ -63,15 +63,7 @@ services:
       dockerfile: ./frontend/Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      HOST_OS: ${OS}
-      NODE_ENV: development
-      HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_BOSS_API_HOST: http://localhost:8000
     networks:
-      - "plaid"
-
-networks:
-  plaid:
-    name: plaid
+      - "quickstart"
+    environment:
+      - REACT_APP_API_HOST=http://java:8000
