@@ -31,7 +31,7 @@ const App = () => {
   }, [dispatch]);
 
   const generateToken = useCallback(
-    async (isPaymentInitiation) => {
+    async (isPaymentInitiation: any) => {
       // Link tokens for 'payment_initiation' use a different creation flow in your backend.
       const path = isPaymentInitiation
         ? "/api/create_link_token_for_payment"

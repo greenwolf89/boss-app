@@ -1,14 +1,14 @@
 volumes:
   boss-app-data:
     external: true
-x-environment:
-  &PLAID_ENVIRONMENT # These are read from .env file. The values in the .env file maybe overriden by shell envvars
-  PLAID_CLIENT_ID: ${PLAID_CLIENT_ID}
-  PLAID_SECRET: ${PLAID_SECRET}
-  PLAID_PRODUCTS: ${PLAID_PRODUCTS}
-  PLAID_COUNTRY_CODES: ${PLAID_COUNTRY_CODES}
-  PLAID_REDIRECT_URI: ${PLAID_REDIRECT_URI}
-  PLAID_ENV: ${PLAID_ENV}
+# x-environment:
+#   &PLAID_ENVIRONMENT # These are read from .env file. The values in the .env file maybe overriden by shell envvars
+#   PLAID_CLIENT_ID: ${PLAID_CLIENT_ID}
+#   PLAID_SECRET: ${PLAID_SECRET}
+#   PLAID_PRODUCTS: ${PLAID_PRODUCTS}
+#   PLAID_COUNTRY_CODES: ${PLAID_COUNTRY_CODES}
+#   PLAID_REDIRECT_URI: ${PLAID_REDIRECT_URI}
+#   PLAID_ENV: ${PLAID_ENV}
 services:
   postgres:
     image: "postgres:14.2-bullseye"
@@ -49,28 +49,36 @@ services:
     build:
       context: .
       dockerfile: ./java/Dockerfile
-    ports: ["8000:8000"]
+    ports:
+      - "8000:8000"
     environment:
-      <<: *PLAID_ENVIRONMENT
+      - PLAID_CLIENT_ID=$PLAID_CLIENT_ID
+      - PLAID_SECRET=$PLAID_SECRET
+      - PLAID_PRODUCTS=$PLAID_PRODUCTS
+      - PLAID_COUNTRY_CODES=$PLAID_COUNTRY_CODES
+      - PLAID_REDIRECT_URI=$PLAID_REDIRECT_URI
+      - PLAID_ENV=$PLAID_ENV
 
   frontend:
-    depends_on:
-      - backend
+    # depends_on:
+    #   - backend
     # volumes:
     #   - ./frontend:/app
+    networks:
+      - "plaid"
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
     ports:
       - "3000:3000"
     environment:
-      HOST_OS: ${OS}
-      NODE_ENV: development
-      HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_BOSS_API_HOST: http://localhost:8000
-    networks:
-      - "plaid"
+      # HOST_OS: ${OS}
+      # NODE_ENV: development
+      # HOST: "0.0.0.0"
+      # PUBLIC_URL: http://localhost:3000
+      - REACT_APP_API_HOST
+      # REACT_APP_BOSS_API_HOST: http://localhost:8081
+
 
 networks:
   plaid:
