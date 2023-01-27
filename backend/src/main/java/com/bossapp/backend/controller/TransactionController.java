@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bossapp.backend.model.Transaction;
 import com.bossapp.backend.repository.TransactionRepository;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3001")
 @RestController
 @RequestMapping("/api")
 public class TransactionController {

@@ -1,33 +1,32 @@
 package com.plaid.quickstart.resources;
 
 import java.io.IOException;
-
-import com.plaid.client.request.PlaidApi;
-import com.plaid.client.model.ItemPublicTokenExchangeRequest;
-import com.plaid.client.model.ItemPublicTokenExchangeResponse;
-import com.plaid.client.model.TransferUserInRequest;
-import com.plaid.client.model.TransferAuthorizationCreateRequest;
-import com.plaid.client.model.TransferAuthorizationCreateResponse;
-import com.plaid.client.model.TransferCreateRequest;
-import com.plaid.client.model.TransferCreateResponse;
-import com.plaid.client.model.TransferType;
-import com.plaid.client.model.TransferNetwork;
-import com.plaid.client.model.ACHClass;
-import com.plaid.client.model.AccountsGetRequest;
-import com.plaid.client.model.AccountsGetResponse;
-import com.plaid.quickstart.QuickstartApplication;
-import com.plaid.client.model.Products;
-
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.plaid.client.model.ACHClass;
+import com.plaid.client.model.AccountsGetRequest;
+import com.plaid.client.model.AccountsGetResponse;
+import com.plaid.client.model.ItemPublicTokenExchangeRequest;
+import com.plaid.client.model.ItemPublicTokenExchangeResponse;
+import com.plaid.client.model.TransferAuthorizationCreateRequest;
+import com.plaid.client.model.TransferAuthorizationCreateResponse;
+import com.plaid.client.model.TransferCreateRequest;
+import com.plaid.client.model.TransferCreateResponse;
+import com.plaid.client.model.TransferNetwork;
+import com.plaid.client.model.TransferType;
+import com.plaid.client.model.TransferUserInRequest;
+import com.plaid.client.request.PlaidApi;
+import com.plaid.quickstart.QuickstartApplication;
 
 import retrofit2.Response;
 

@@ -43,6 +43,20 @@ services:
       - SPRING_DATASOURCE_USERNAME=boss_user
       - SPRING_DATASOURCE_PASSWORD=boss-pw
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  frontend:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    ports:
+      - "3001:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3001
+      REACT_APP_BOSS_API_HOST: http://localhost:8081
   java:
     networks:
       - "quickstart"
@@ -51,19 +65,18 @@ services:
     build:
       context: .
       dockerfile: ./java/Dockerfile
-    ports: ["8000:8000"]
+    ports:
+      - "8000:8000"
     environment:
       <<: *QUICKSTART_ENVIRONMENT
 
-  frontend:
-    # volumes:
-    #   - ./frontend:/app
-    build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    ports:
-      - "3000:3000"
+  plaid_frontend:
     networks:
       - "quickstart"
+    build:
+      context: .
+      dockerfile: ./plaid_frontend/Dockerfile
+    ports:
+      - "3000:3000"
     environment:
       - REACT_APP_API_HOST=http://java:8000
