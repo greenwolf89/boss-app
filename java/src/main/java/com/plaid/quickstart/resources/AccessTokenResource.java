@@ -89,9 +89,9 @@ public class AccessTokenResource {
       Response<TransferAuthorizationCreateResponse> transferAuthorizationCreateResponse = plaidClient
         .transferAuthorizationCreate(transferAuthorizationCreateRequest)
         .execute();
-  
+
       String authorizationId = transferAuthorizationCreateResponse.body().getAuthorization().getId();
-      
+
       TransferCreateRequest transferCreateRequest = new TransferCreateRequest()
         .authorizationId(authorizationId)
         .idempotencyKey("1223abc456xyz7890001")
@@ -115,5 +115,5 @@ public class AccessTokenResource {
       QuickstartApplication.itemID);
   }
 
- 
+
 }
