@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bossapp.backend.model.Account;
 import com.bossapp.backend.repository.AccountRepository;
 
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class AccountController {
