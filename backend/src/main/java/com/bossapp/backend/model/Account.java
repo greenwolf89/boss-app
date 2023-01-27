@@ -23,15 +23,19 @@ public class Account {
     @Column(name = "password", nullable = false, length=65)
     private String password;
 
+    @Column(name = "accessToken", nullable = false, length=65)
+    private String accessToken;
+
     public Account() {
 
 	}
 
-    public Account(long id, String username, String email, String password) {
+    public Account(long id, String username, String email, String password, String accessToken) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.accessToken = accessToken;
     }
 
     public long getId() {
@@ -66,9 +70,18 @@ public class Account {
         this.password = password;
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
+        return "Account [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+                + ", accessToken=" + accessToken + "]";
     }
 
 }

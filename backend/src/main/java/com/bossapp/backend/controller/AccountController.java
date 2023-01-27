@@ -61,7 +61,7 @@ public class AccountController {
     public ResponseEntity<Account> createAccount(@RequestBody Account account){
         try {
 			Account _account = accountRepository
-					.save(new Account(account.getId(), account.getUsername(), account.getEmail(), account.getPassword()));
+					.save(new Account(account.getId(), account.getUsername(), account.getEmail(), account.getPassword(), account.getAccessToken()));
 			return new ResponseEntity<>(_account, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,6 +76,7 @@ public class AccountController {
 			_account.setId(account.getId());
 			_account.setUsername(account.getUsername());
 			_account.setEmail(account.getEmail());
+			_account.setAccessToken(account.getAccessToken());
 			return new ResponseEntity<>(accountRepository.save(_account), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
