@@ -45,7 +45,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   frontend:
     image: node:lts-bullseye
-    command: /bin/bash run.sh
+    command: bash -c "npm install && npm start"
     volumes:
       - ./frontend:/app
     working_dir: /app

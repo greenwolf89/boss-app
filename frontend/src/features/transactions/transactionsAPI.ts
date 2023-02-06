@@ -24,3 +24,5 @@ export const transactionsApi = createApi({
     }),
   }),
 });
+
+export const { useGetTransactionsQuery } = transactionsApi;
