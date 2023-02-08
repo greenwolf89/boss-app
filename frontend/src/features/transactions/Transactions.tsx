@@ -8,7 +8,7 @@ function Transactions() {
       <table>
         <thead>
           <tr>
-            <th>nope</th>
+            <th>Amount</th>
             <th>Category</th>
             <th>Merchant</th>
             <th>Date</th>
