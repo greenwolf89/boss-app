@@ -1,7 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
-import Transactions from "./features/transactions/Transactions";
 import "./App.css";
+import Transactions from "./features/transactions/Transactions";
 
 function App() {
   return (
