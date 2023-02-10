@@ -5,7 +5,7 @@ const LineBreak = () => {
     return (
         <div style={{
             background: '#1473a6',
-            height: '5vh',
+            height: '2.5vh',
         }}>
             <p style={{
                 padding: '0',

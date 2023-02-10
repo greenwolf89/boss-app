@@ -7,7 +7,7 @@ const Banner: React.FC = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '50vh',
+            height: '40vh',
             width: '100%',
             textAlign: 'center',
             background: 'linear-gradient(90deg, rgba(209,228,238,1) 15%, rgba(245,245,245,1) 35%, rgba(245,245,245,1) 65%, rgba(209,228,238,1) 85%)'
