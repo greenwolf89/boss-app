@@ -3,8 +3,6 @@ import Banner from "./banner";
 import LineBreak from "./linebreak";
 import Sells from "./sells";
 
-
-
 function Main() {
 
     return (
@@ -15,8 +13,11 @@ function Main() {
             <LineBreak />
             <div style={{
                 background: '#ebf1f5',
-                margin: '0',
-                padding: '0',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                textAlign: 'center',
             }}>
                 <Sells />
             </div>
