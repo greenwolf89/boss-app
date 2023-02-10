@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import Transactions from "./features/transactions/Transactions";
 // import NavBar from "./features/navbar/NavBar";
@@ -7,10 +6,10 @@ import Main from "./features/main/main";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         {/* <NavBar /> */}
-        <div className="container">
+        <div>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/transactions" element={<Transactions />} />
