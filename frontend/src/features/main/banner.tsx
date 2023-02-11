@@ -1,5 +1,7 @@
+import { Button } from "@mui/material";
 import React from "react";
-import { Button } from "react-bootstrap";
+
+
 
 const Banner: React.FC = () => {
     return (
@@ -20,7 +22,11 @@ const Banner: React.FC = () => {
             }}>
                 <h1 className="banner-title">Budget Often</h1>
                 <h1 className="banner-title">Save Smarter</h1>
-                <Button variant="success" size="lg">Sign up for free</Button>{' '}
+                <Button style={{
+                    marginTop: '15px',
+                }} variant="contained" size="large">
+                Sign up for free
+                </Button>
             </div>
         </div>
     );

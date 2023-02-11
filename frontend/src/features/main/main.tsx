@@ -11,14 +11,8 @@ function Main() {
                 <Banner />
             </section>
             <LineBreak />
-            <div style={{
-                background: '#ebf1f5',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                textAlign: 'center',
-            }}>
+            <h1 className="main-secondary-title">Why use B.O.S.S.?</h1>
+            <div className="sells-div">
                 <Sells />
             </div>
             <footer>

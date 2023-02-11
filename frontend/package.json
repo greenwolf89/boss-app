@@ -22,7 +22,8 @@
     "web-vitals": "^2.1.4",
     "react-router-dom": "^6.3.0",
     "@emotion/react": "11.10.5",
-    "@emotion/styled": "11.10.5"
+    "@emotion/styled": "11.10.5",
+    "bootstrap": "^5.2.2"
   },
   "scripts": {
     "start": "WATCHPACK_POLLING=true react-scripts start",
