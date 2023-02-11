@@ -1,7 +1,7 @@
 // import { Button } from "@mui/material";
 import sellImageOne from '../media/aggregate_arrows_pointing_to_money.png'
 import sellImageTwo from '../media/profit_rising_graph.png'
-import sellImageThree from '../media/automatic_update2.png'
+import sellImageThree from '../media/automatic_update.png'
 
 const SellOne = () => {
     const sellsData = [
